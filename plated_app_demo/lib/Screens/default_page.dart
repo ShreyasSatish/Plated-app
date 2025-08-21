@@ -14,7 +14,8 @@ class DefaultPage extends StatelessWidget {
         children: [
           // Background image
           Positioned.fill(
-            child: Image.asset( // use local asset; see pubspec step below
+            child: Image.asset(
+              // use local asset; see pubspec step below
               'assets/images/hero_bg.jpg',
               fit: BoxFit.cover,
             ),
@@ -22,7 +23,7 @@ class DefaultPage extends StatelessWidget {
 
           // A subtle dark overlay to make text/buttons pop (optional)
           Positioned.fill(
-            child: Container(color: Colors.black.withOpacity(0.15)),
+            child: Container(color: Colors.black.withValues(alpha: 0.15)),
           ),
 
           SafeArea(
@@ -43,7 +44,8 @@ class DefaultPage extends StatelessWidget {
 
                 // Buttons block
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
@@ -58,7 +60,8 @@ class DefaultPage extends StatelessWidget {
                             padding: const EdgeInsets.symmetric(vertical: 14),
                             elevation: 2,
                           ),
-                          child: const Text('Log in', style: TextStyle(fontSize: 18)),
+                          child: const Text('Log in',
+                              style: TextStyle(fontSize: 18)),
                         ),
                       ),
                       const SizedBox(height: 12),
@@ -67,12 +70,14 @@ class DefaultPage extends StatelessWidget {
                         child: OutlinedButton(
                           onPressed: () {},
                           style: OutlinedButton.styleFrom(
-                            side: const BorderSide(color: Colors.white, width: 2),
+                            side:
+                                const BorderSide(color: Colors.white, width: 2),
                             foregroundColor: Colors.white,
                             shape: const StadiumBorder(),
                             padding: const EdgeInsets.symmetric(vertical: 14),
                           ),
-                          child: const Text('Sign up', style: TextStyle(fontSize: 18)),
+                          child: const Text('Sign up',
+                              style: TextStyle(fontSize: 18)),
                         ),
                       ),
                     ],
