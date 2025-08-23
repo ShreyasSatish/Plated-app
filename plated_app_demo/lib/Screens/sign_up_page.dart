@@ -45,19 +45,18 @@ class _SignUpPageState extends State<SignUpPage> {
               // Header image section
               Container(
                 width: screenWidth,
-                height: screenHeight * 0.25, // 40% of screen height
+                height: screenHeight * 0.25, // 25% of screen height
                 decoration: const BoxDecoration(
                   color: Color(0xFF2a2a2a),
                   image: DecorationImage(
-                    image: NetworkImage(
-                        "https://img.freepik.com/fotos-premium/fundo-de-comida-conjunto-de-comida-em-um-fundo-preto-velho-o-conceito-de-alimentacao-saudavel-vista-superior-espaco-livre-para-texto_187166-27553.jpg?w=360"),
+                    image: AssetImage("assets/images/background_food.png"),
                     fit: BoxFit.cover,
                   ),
                 ),
                 child: Container(
-                  // Add dark overlay to make logo more visible
+                  // Add lighter dark overlay to make logo more visible while keeping background visible
                   decoration: BoxDecoration(
-                    color: Colors.black.withValues(alpha: 0.3),
+                    color: Colors.black.withValues(alpha: 0.5),
                   ),
                   child: Stack(
                     children: [
@@ -81,89 +80,172 @@ class _SignUpPageState extends State<SignUpPage> {
                           ),
                         ),
                       ),
-                      // Plated logo - using the actual logo image
+                      // Plated logo - larger and without white background
                       Center(
                         child: Container(
-                          width: 120,
-                          height: 120,
-                          decoration: BoxDecoration(
-                            color: Colors.white.withValues(alpha: 0.0),
-                            borderRadius: BorderRadius.circular(60),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black.withValues(alpha: 0.2),
-                                blurRadius: 10,
-                                offset: const Offset(0, 2),
-                              ),
-                            ],
-                          ),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(60),
-                            child: Image.network(
-                              "https://imgur.com/a/aRE0hgi", // Using a placeholder that represents your logo
-                              fit: BoxFit.contain,
-                              errorBuilder: (context, error, stackTrace) {
-                                // Fallback to custom logo if image fails to load
-                                return Container(
-                                  padding: const EdgeInsets.all(20),
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      // Custom plated logo
-                                      Stack(
-                                        alignment: Alignment.center,
+                          width: 160, // Increased from 100
+                          height: 160, // Increased from 100
+                          child: Image.asset(
+                            "assets/images/plated_logo.png",
+                            fit: BoxFit.contain,
+                            errorBuilder: (context, error, stackTrace) {
+                              // Fallback custom logo if asset fails to load - also larger
+                              return Container(
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    // Fork on the left
+                                    SizedBox(
+                                      width: 30, // Scaled up from 22
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
                                         children: [
-                                          // Plate circle
+                                          // Fork tines
+                                          SizedBox(
+                                            width: 20, // Scaled up from 14
+                                            height: 28, // Scaled up from 20
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.spaceEvenly,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Container(
+                                                    width:
+                                                        3, // Scaled up from 2
+                                                    height:
+                                                        25, // Scaled up from 18
+                                                    decoration: BoxDecoration(
+                                                      color: const Color(
+                                                          0xFFFFA838),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              1.5),
+                                                    )),
+                                                Container(
+                                                    width: 3,
+                                                    height: 25,
+                                                    decoration: BoxDecoration(
+                                                      color: const Color(
+                                                          0xFFFFA838),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              1.5),
+                                                    )),
+                                                Container(
+                                                    width: 3,
+                                                    height: 25,
+                                                    decoration: BoxDecoration(
+                                                      color: const Color(
+                                                          0xFFFFA838),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              1.5),
+                                                    )),
+                                                Container(
+                                                    width: 3,
+                                                    height: 25,
+                                                    decoration: BoxDecoration(
+                                                      color: const Color(
+                                                          0xFFFFA838),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              1.5),
+                                                    )),
+                                              ],
+                                            ),
+                                          ),
+                                          const SizedBox(height: 3),
+                                          // Fork handle
                                           Container(
-                                            width: 40,
-                                            height: 40,
+                                            width: 6, // Scaled up from 4
+                                            height: 63, // Scaled up from 45
                                             decoration: BoxDecoration(
-                                              border: Border.all(
-                                                  color:
-                                                      const Color(0xFFFFA838),
-                                                  width: 2.5),
-                                              shape: BoxShape.circle,
-                                            ),
-                                          ),
-                                          // Fork (left)
-                                          const Positioned(
-                                            left: 2,
-                                            child: Icon(
-                                              Icons.restaurant,
-                                              color: Color(0xFFFFA838),
-                                              size: 22,
-                                            ),
-                                          ),
-                                          // Knife (right)
-                                          const Positioned(
-                                            right: 2,
-                                            child: RotatedBox(
-                                              quarterTurns: 1,
-                                              child: Icon(
-                                                Icons.local_dining,
-                                                color: Color(0xFFFFA838),
-                                                size: 22,
-                                              ),
+                                              color: const Color(0xFFFFA838),
+                                              borderRadius:
+                                                  BorderRadius.circular(3),
                                             ),
                                           ),
                                         ],
                                       ),
-                                      const SizedBox(height: 8),
-                                      // "plated" text
-                                      const Text(
-                                        'plated',
-                                        style: TextStyle(
-                                          color: Color(0xFFFFA838),
-                                          fontSize: 16,
-                                          fontFamily: 'Inter',
-                                          fontWeight: FontWeight.w600,
+                                    ),
+
+                                    const SizedBox(
+                                        width: 8), // Scaled up from 6
+
+                                    // Plate in the center
+                                    Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Container(
+                                          width: 45, // Scaled up from 32
+                                          height: 45, // Scaled up from 32
+                                          decoration: BoxDecoration(
+                                            shape: BoxShape.circle,
+                                            border: Border.all(
+                                              color: const Color(0xFFFFA838),
+                                              width: 3.5, // Scaled up from 2.5
+                                            ),
+                                          ),
                                         ),
+                                        const SizedBox(
+                                            height: 6), // Scaled up from 4
+                                        const Text(
+                                          'plated',
+                                          style: TextStyle(
+                                            color: Color(0xFFFFA838),
+                                            fontSize: 17, // Scaled up from 12
+                                            fontWeight: FontWeight.w600,
+                                            letterSpacing: -0.5,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+
+                                    const SizedBox(
+                                        width: 8), // Scaled up from 6
+
+                                    // Knife on the right
+                                    SizedBox(
+                                      width: 30, // Scaled up from 22
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          // Knife blade
+                                          Container(
+                                            width: 7, // Scaled up from 5
+                                            height: 35, // Scaled up from 25
+                                            decoration: const BoxDecoration(
+                                              color: Color(0xFFFFA838),
+                                              borderRadius: BorderRadius.only(
+                                                topLeft: Radius.circular(3.5),
+                                                topRight: Radius.circular(3.5),
+                                              ),
+                                            ),
+                                          ),
+                                          const SizedBox(
+                                              height: 3), // Scaled up from 2
+                                          // Knife handle
+                                          Container(
+                                            width: 10, // Scaled up from 7
+                                            height: 56, // Scaled up from 40
+                                            decoration: BoxDecoration(
+                                              color: const Color(0xFFFFA838),
+                                              borderRadius:
+                                                  BorderRadius.circular(5),
+                                            ),
+                                          ),
+                                        ],
                                       ),
-                                    ],
-                                  ),
-                                );
-                              },
-                            ),
+                                    ),
+                                  ],
+                                ),
+                              );
+                            },
                           ),
                         ),
                       ),
@@ -177,7 +259,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 width: screenWidth,
                 constraints: BoxConstraints(
                   minHeight:
-                      screenHeight * 0.6, // At least 60% of screen height
+                      screenHeight * 0.75, // At least 75% of screen height
                 ),
                 decoration: const ShapeDecoration(
                   color: Color(0xFFFAF1DF),
