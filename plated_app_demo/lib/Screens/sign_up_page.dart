@@ -49,7 +49,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 decoration: const BoxDecoration(
                   color: Color(0xFF2a2a2a),
                   image: DecorationImage(
-                    image: AssetImage("assets/images/background_food.png"),
+                    image: AssetImage("assets/images/sign_up_background.png"),
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -82,7 +82,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       ),
                       // Plated logo - larger and without white background
                       Center(
-                        child: Container(
+                        child: SizedBox(
                           width: 160, // Increased from 100
                           height: 160, // Increased from 100
                           child: Image.asset(
