@@ -45,8 +45,9 @@ class _PreferencesPageNewState extends State<PreferencesPageNew> {
     final size = MediaQuery.of(context).size;
 
     return Scaffold(
-        backgroundColor: const Color(0xFF2F2F2E),
-        body: Stack(children: [
+      backgroundColor: const Color(0xFF2F2F2E),
+      body: Stack(
+        children: [
           // Orange solid background circle
           Positioned(
             left: size.width * 0.05,
@@ -82,189 +83,203 @@ class _PreferencesPageNewState extends State<PreferencesPageNew> {
           ),
 
           // Main content
-          SafeArea(child: LayoutBuilder(
-            builder: (context, constraints) {
+          SafeArea(
+            child: LayoutBuilder(builder: (context, constraints) {
+              final availableHeight =
+                  constraints.maxHeight - 40; // Account for padding
+
+              // Calculate approximate content height
+              const titleHeight = 24 + 30; // Title + spacing
+              const sectionHeaderHeight =
+                  16 + 15; // Each section header + spacing
+              const chipSectionHeight =
+                  40 + 40; // Approximate chip height + spacing
+              const buttonHeight = 50 + 80; // Button + spacing before it
+              const extraSpacing = 200; // Bottom spacing
+
+              final approximateContentHeight = titleHeight +
+                  (sectionHeaderHeight * 3) +
+                  (chipSectionHeight * 3) +
+                  buttonHeight +
+                  extraSpacing;
+
+              final needsScrolling = approximateContentHeight > availableHeight;
+
               return SingleChildScrollView(
-                physics: const ClampingScrollPhysics(),
+                physics: needsScrolling
+                    ? const AlwaysScrollableScrollPhysics()
+                    : const NeverScrollableScrollPhysics(),
                 padding:
                     const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-                child: ConstrainedBox(
-                  constraints: BoxConstraints(
-                    minHeight:
-                        constraints.maxHeight - 40, // Account for padding
-                  ),
-                  child: IntrinsicHeight(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    // Title
+                    const Text(
+                      'Select your preferences:',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 24,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+
+                    const SizedBox(height: 30),
+
+                    // Cuisine Section
+                    const Text(
+                      'Cuisine',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+
+                    const SizedBox(height: 15),
+
+                    Wrap(
+                      spacing: 8,
+                      runSpacing: 8,
+                      alignment: WrapAlignment.center,
                       children: [
-                        // Title
-                        const Text(
-                          'Select your preferences:',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 24,
-                            fontWeight: FontWeight.w400,
-                          ),
-                        ),
+                        'Italian',
+                        'American',
+                        'Indian',
+                        'Chinese',
+                        'Thai',
+                        'Japanese',
+                        'Lebanese',
+                        'British',
+                        'African',
+                        'French',
+                        'Spanish'
+                      ]
+                          .map((cuisine) => ChipWidget(
+                                label: cuisine,
+                                isSelected: selectedCuisines.contains(cuisine),
+                                onTap: () =>
+                                    toggleSelection(cuisine, selectedCuisines),
+                              ))
+                          .toList(),
+                    ),
 
-                        const SizedBox(height: 30),
+                    const SizedBox(height: 40),
 
-                        // Cuisine Section
-                        const Text(
-                          'Cuisine',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w400,
-                          ),
-                        ),
+                    // Equipment Section
+                    const Text(
+                      'Equipment Available',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
 
-                        const SizedBox(height: 15),
+                    const SizedBox(height: 15),
 
-                        Wrap(
-                          spacing: 8,
-                          runSpacing: 8,
-                          alignment: WrapAlignment.center,
-                          children: [
-                            'Italian',
-                            'American',
-                            'Indian',
-                            'Chinese',
-                            'Thai',
-                            'Japanese',
-                            'Lebanese',
-                            'British',
-                            'African',
-                            'French',
-                            'Spanish'
-                          ]
-                              .map((cuisine) => ChipWidget(
-                                    label: cuisine,
-                                    isSelected:
-                                        selectedCuisines.contains(cuisine),
-                                    onTap: () => toggleSelection(
-                                        cuisine, selectedCuisines),
-                                  ))
-                              .toList(),
-                        ),
+                    Wrap(
+                      spacing: 8,
+                      runSpacing: 8,
+                      alignment: WrapAlignment.center,
+                      children: [
+                        'Oven',
+                        'Air fryer',
+                        'Freezer',
+                        'Blender',
+                        'Stove',
+                        'Kettle'
+                      ]
+                          .map((equipment) => ChipWidget(
+                                label: equipment,
+                                isSelected:
+                                    selectedEquipment.contains(equipment),
+                                onTap: () => toggleSelection(
+                                    equipment, selectedEquipment),
+                              ))
+                          .toList(),
+                    ),
 
-                        const SizedBox(height: 40),
+                    const SizedBox(height: 40),
 
-                        // Equipment Section
-                        const Text(
-                          'Equipment Available',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w400,
-                          ),
-                        ),
+                    // Dietary Requirements Section
+                    const Text(
+                      'Dietary Requirements',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
 
-                        const SizedBox(height: 15),
+                    const SizedBox(height: 15),
 
-                        Wrap(
-                          spacing: 8,
-                          runSpacing: 8,
-                          alignment: WrapAlignment.center,
-                          children: [
-                            'Oven',
-                            'Air fryer',
-                            'Freezer',
-                            'Blender',
-                            'Stove',
-                            'Kettle'
-                          ]
-                              .map((equipment) => ChipWidget(
-                                    label: equipment,
-                                    isSelected:
-                                        selectedEquipment.contains(equipment),
-                                    onTap: () => toggleSelection(
-                                        equipment, selectedEquipment),
-                                  ))
-                              .toList(),
-                        ),
+                    Wrap(
+                      spacing: 8,
+                      runSpacing: 8,
+                      alignment: WrapAlignment.center,
+                      children: [
+                        'Vegan',
+                        'Vegetarian',
+                        'Gluten-Free',
+                        'Halal',
+                        'Kosher',
+                        'Nut-free'
+                      ]
+                          .map((dietary) => ChipWidget(
+                                label: dietary,
+                                isSelected: selectedDietary.contains(dietary),
+                                onTap: () =>
+                                    toggleSelection(dietary, selectedDietary),
+                              ))
+                          .toList(),
+                    ),
 
-                        const SizedBox(height: 40),
+                    const SizedBox(height: 80),
 
-                        // Dietary Requirements Section
-                        const Text(
-                          'Dietary Requirements',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w400,
-                          ),
-                        ),
-
-                        const SizedBox(height: 15),
-
-                        Wrap(
-                          spacing: 8,
-                          runSpacing: 8,
-                          alignment: WrapAlignment.center,
-                          children: [
-                            'Vegan',
-                            'Vegetarian',
-                            'Gluten-Free',
-                            'Halal',
-                            'Kosher',
-                            'Nut-free'
-                          ]
-                              .map((dietary) => ChipWidget(
-                                    label: dietary,
-                                    isSelected:
-                                        selectedDietary.contains(dietary),
-                                    onTap: () => toggleSelection(
-                                        dietary, selectedDietary),
-                                  ))
-                              .toList(),
-                        ),
-
-                        const SizedBox(height: 80),
-
-                        // Plate button
-                        Container(
-                          width: 160,
-                          height: 50,
-                          decoration: BoxDecoration(
-                            color: const Color(0xFFFF7C55),
-                            borderRadius: BorderRadius.circular(25),
-                            border: Border.all(color: Colors.black, width: 2),
-                          ),
-                          child: Material(
-                            color: Colors.transparent,
-                            child: InkWell(
-                              borderRadius: BorderRadius.circular(25),
-                              onTap: () {
-                                // Access selected preferences:
-                                // selectedCuisines, selectedEquipment, selectedDietary
-                                // print('Selected cuisines: $selectedCuisines');
-                                // print('Selected equipment: $selectedEquipment');
-                                // print('Selected dietary: $selectedDietary');
-                              },
-                              child: const Center(
-                                child: Text(
-                                  'Plate!',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                                ),
+                    // Plate button
+                    Container(
+                      width: 160,
+                      height: 50,
+                      decoration: BoxDecoration(
+                        color: const Color(0xFFFF7C55),
+                        borderRadius: BorderRadius.circular(25),
+                        border: Border.all(color: Colors.black, width: 2),
+                      ),
+                      child: Material(
+                        color: Colors.transparent,
+                        child: InkWell(
+                          borderRadius: BorderRadius.circular(25),
+                          onTap: () {
+                            // Access selected preferences:
+                            // selectedCuisines, selectedEquipment, selectedDietary
+                            // print('Selected cuisines: $selectedCuisines');
+                            // print('Selected equipment: $selectedEquipment');
+                            // print('Selected dietary: $selectedDietary');
+                          },
+                          child: const Center(
+                            child: Text(
+                              'Plate!',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 20,
+                                fontWeight: FontWeight.w400,
                               ),
                             ),
                           ),
                         ),
-
-                        const SizedBox(height: 200), // Extra space for image
-                      ],
+                      ),
                     ),
-                  ),
+
+                    const SizedBox(height: 200), // Extra space for image
+                  ],
                 ),
               );
-            },
-          ))
-        ]));
+            }),
+          )
+        ],
+      ),
+    );
   }
 }
 
