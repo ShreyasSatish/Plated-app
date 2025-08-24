@@ -32,6 +32,9 @@ class _CalendarScreenState extends State<CalendarScreen> {
   final TextEditingController _whatToEatController = TextEditingController();
   final TextEditingController _whenToEatController = TextEditingController();
 
+  // Track which icons are being pressed
+  String? pressedIcon;
+
   void _previousMonth() {
     setState(() {
       currentDate = DateTime(currentDate.year, currentDate.month - 1);
@@ -136,7 +139,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
                     ),
                     // Title
                     Positioned(
-                      left: 0,
+                      left: 2,
                       bottom: -screenHeight * 0.01,
                       child: Text(
                         'Calendar',
@@ -298,13 +301,13 @@ class _CalendarScreenState extends State<CalendarScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     _buildBottomNavItem(
-                        Icons.calendar_today, true, screenWidth),
+                        Icons.calendar_today, true, screenWidth, 'calendar'),
                     _buildBottomNavItem(
-                        Icons.favorite_border, false, screenWidth),
-                    _buildBottomNavItem(Icons.event, false, screenWidth),
-                    _buildBottomNavItem(Icons.menu_book, false, screenWidth),
-                    _buildBottomNavItem(
-                        Icons.shopping_cart, false, screenWidth),
+                        Icons.favorite_border, false, screenWidth, 'favorite'),
+                    _buildDoubleStarIcon(screenWidth, 'stars'),
+                    _buildBottomNavItem(Icons.list, false, screenWidth, 'list'),
+                    _buildBottomNavItem(Icons.shopping_cart_outlined, false,
+                        screenWidth, 'cart'),
                   ],
                 ),
               ),
@@ -500,14 +503,114 @@ class _CalendarScreenState extends State<CalendarScreen> {
   }
 
   Widget _buildBottomNavItem(
-      IconData icon, bool isSelected, double screenWidth) {
-    return SizedBox(
-      width: screenWidth * 0.08,
-      height: screenWidth * 0.08,
-      child: Icon(
-        icon,
-        color: isSelected ? const Color(0xFFFFA838) : Colors.white,
-        size: screenWidth * 0.06,
+      IconData icon, bool isSelected, double screenWidth, String iconKey) {
+    final isPressed = pressedIcon == iconKey;
+
+    return GestureDetector(
+      onTapDown: (_) => setState(() => pressedIcon = iconKey),
+      onTapUp: (_) => setState(() => pressedIcon = null),
+      onTapCancel: () => setState(() => pressedIcon = null),
+      onTap: () {
+        // Handle navigation tap
+        // print('$iconKey tapped');
+      },
+      child: Container(
+        width: screenWidth * 0.12,
+        height: screenWidth * 0.12,
+        decoration: isPressed
+            ? BoxDecoration(
+                shape: BoxShape.circle,
+                color: Colors.white.withValues(alpha: 0.3),
+              )
+            : null,
+        child: Center(
+          child: Icon(
+            icon,
+            color: isSelected ? const Color(0xFFFFA838) : Colors.white,
+            size: screenWidth * 0.06,
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildClickableIcon({
+    required IconData icon,
+    required String iconKey,
+    required VoidCallback onTap,
+    required double screenWidth,
+  }) {
+    final isPressed = pressedIcon == iconKey;
+
+    return GestureDetector(
+      onTapDown: (_) => setState(() => pressedIcon = iconKey),
+      onTapUp: (_) => setState(() => pressedIcon = null),
+      onTapCancel: () => setState(() => pressedIcon = null),
+      onTap: onTap,
+      child: Container(
+        width: screenWidth * 0.1,
+        height: screenWidth * 0.1,
+        decoration: isPressed
+            ? BoxDecoration(
+                shape: BoxShape.circle,
+                color: Colors.white.withValues(alpha: 0.3),
+              )
+            : null,
+        child: Center(
+          child: Icon(
+            icon,
+            color: Colors.white,
+            size: screenWidth * 0.07,
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildDoubleStarIcon(double screenWidth, String iconKey) {
+    final isPressed = pressedIcon == iconKey;
+
+    return GestureDetector(
+      onTapDown: (_) => setState(() => pressedIcon = iconKey),
+      onTapUp: (_) => setState(() => pressedIcon = null),
+      onTapCancel: () => setState(() => pressedIcon = null),
+      onTap: () {
+        // Handle double star tap
+        // print('Double stars tapped');
+      },
+      child: Container(
+        width: screenWidth * 0.12,
+        height: screenWidth * 0.12,
+        decoration: isPressed
+            ? BoxDecoration(
+                shape: BoxShape.circle,
+                color: Colors.white.withValues(alpha: 0.3),
+              )
+            : null,
+        child: Center(
+          child: Stack(
+            children: [
+              Positioned(
+                left: 2,
+                top: 0,
+                child: Icon(
+                  Icons.star_border,
+                  color: Colors.white,
+                  size: screenWidth * 0.045,
+                ),
+              ),
+              Positioned(
+                right: 0,
+                bottom: 2,
+                child: Icon(
+                  Icons.star_border,
+                  color: Colors.white,
+                  size: screenWidth * 0.045,
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
