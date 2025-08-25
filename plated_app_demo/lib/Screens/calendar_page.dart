@@ -591,8 +591,8 @@ class _CalendarScreenState extends State<CalendarScreen> {
           child: Stack(
             children: [
               Positioned(
-                left: 2,
-                top: 0,
+                left: 8,
+                top: 8,
                 child: Icon(
                   Icons.star_border,
                   color: Colors.white,
@@ -600,8 +600,8 @@ class _CalendarScreenState extends State<CalendarScreen> {
                 ),
               ),
               Positioned(
-                right: 0,
-                bottom: 2,
+                right: 12,
+                bottom: 12,
                 child: Icon(
                   Icons.star_border,
                   color: Colors.white,

@@ -106,7 +106,7 @@ class Favourites extends StatelessWidget {
               color: const Color(0xFFFFF2DA),
               child: const Center(
                 child: Text(
-                  'Your favourite content will appear here',
+                  'Your favourite recipes will appear here!',
                   style: TextStyle(
                     color: Colors.grey,
                     fontSize: 16,
@@ -187,22 +187,22 @@ class Favourites extends StatelessWidget {
           height: screenWidth * 0.08,
           child: Stack(
             children: [
-              // Back star (bottom right)
+              // Back star (bottom right) - hollow
               Positioned(
                 right: 0,
                 bottom: 0,
                 child: Icon(
-                  Icons.star,
+                  Icons.star_outline,
                   color: Colors.white,
                   size: screenWidth * 0.05,
                 ),
               ),
-              // Front star (top left)
+              // Front star (top left) - hollow
               Positioned(
                 left: 0,
                 top: 0,
                 child: Icon(
-                  Icons.star,
+                  Icons.star_outline,
                   color: Colors.white,
                   size: screenWidth * 0.05,
                 ),
