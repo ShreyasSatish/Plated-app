@@ -341,7 +341,7 @@ class _GroceryListToBuyState extends State<GroceryListToBuy> {
                           ),
                           const SizedBox(width: 20),
                           Text(
-                            '#${item.quantity}',
+                            'Number: ${item.quantity}',
                             style: const TextStyle(
                               color: Color(0xFF282626),
                               fontSize: 16.18,
