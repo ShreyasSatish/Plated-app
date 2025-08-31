@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 
+// Welcome Page Code
 void main() {
-  runApp(const FigmaToCodeApp());
+  runApp(const Welcome());
 }
 
-class FigmaToCodeApp extends StatelessWidget {
-  const FigmaToCodeApp({super.key});
+class Welcome extends StatelessWidget {
+  const Welcome({super.key});
 
   @override
   Widget build(BuildContext context) {

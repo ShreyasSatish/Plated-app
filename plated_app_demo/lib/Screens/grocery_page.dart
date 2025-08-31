@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 
+// Grocery List Page Code
 void main() {
-  runApp(const FigmaToCodeApp());
+  runApp(const GroceryListPage());
 }
 
-class FigmaToCodeApp extends StatelessWidget {
-  const FigmaToCodeApp({super.key});
+class GroceryListPage extends StatelessWidget {
+  const GroceryListPage({super.key});
 
   @override
   Widget build(BuildContext context) {

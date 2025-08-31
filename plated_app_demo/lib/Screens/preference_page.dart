@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 
+// Preference Page Code
 void main() {
-  runApp(const FigmaToCodeApp());
+  runApp(const PreferencePage());
 }
 
-class FigmaToCodeApp extends StatelessWidget {
-  const FigmaToCodeApp({super.key});
+class PreferencePage extends StatelessWidget {
+  const PreferencePage({super.key});
 
   @override
   Widget build(BuildContext context) {

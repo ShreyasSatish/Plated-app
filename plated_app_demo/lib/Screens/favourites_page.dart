@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 
+// Favourites Page Code
 void main() {
-  runApp(const FigmaToCodeApp());
+  runApp(const FavouritesPage());
 }
 
-class FigmaToCodeApp extends StatelessWidget {
-  const FigmaToCodeApp({super.key});
+class FavouritesPage extends StatelessWidget {
+  const FavouritesPage({super.key});
 
   @override
   Widget build(BuildContext context) {

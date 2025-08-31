@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 
+// Pantry Page Code
 void main() {
-  runApp(const FigmaToCodeApp());
+  runApp(const PantryPage());
 }
 
-class FigmaToCodeApp extends StatelessWidget {
-  const FigmaToCodeApp({super.key});
+class PantryPage extends StatelessWidget {
+  const PantryPage({super.key});
 
   @override
   Widget build(BuildContext context) {

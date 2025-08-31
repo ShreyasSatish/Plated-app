@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 
+// Calendar Page Code
 void main() {
-  runApp(const FigmaToCodeApp());
+  runApp(const CalendarPage());
 }
 
-class FigmaToCodeApp extends StatelessWidget {
-  const FigmaToCodeApp({super.key});
+class CalendarPage extends StatelessWidget {
+  const CalendarPage({super.key});
 
   @override
   Widget build(BuildContext context) {
