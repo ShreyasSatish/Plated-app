@@ -1,6 +1,6 @@
 # plated_app_demo
 
-A new Flutter project.
+A new Flutter project. Plated app. 
 
 ## Getting Started
 

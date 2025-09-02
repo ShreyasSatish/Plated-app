@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "886035718244",
+    "project_id": "plated-app-e8469",
+    "storage_bucket": "plated-app-e8469.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:886035718244:android:46dc1660d4125dd0ffff71",
+        "android_client_info": {
+          "package_name": "com.example.plated_app_demo"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCjxWehKwic1pmDahcFfsr3UzgK4sWQGeE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,5 +1,16 @@
 import 'package:flutter/material.dart';
 import 'screens/default_page.dart';
+import 'package:english_words/english_words.dart';
+import 'package:provider/provider.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
+
+// ...
+
+await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+);
+
 
 void main() {
   runApp(const MyApp());
@@ -35,6 +46,12 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
+class MyAppState extends ChangeNotifier {
+  var current = WordPair.random();
+}
+
+
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
