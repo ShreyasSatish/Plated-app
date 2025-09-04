@@ -1,0 +1,33 @@
+# Flutter
+.dart_tool/
+.packages
+.pub-cache/
+build/
+flutter_*.png
+
+# Firebase
+firebase_app_id_file.json
+.firebase/
+web/firebase-messaging-sw.js
+
+# macOS
+macos/Flutter/ephemeral/
+
+# Android
+android/.gradle/
+android/app/build/
+
+# iOS
+ios/Pods/
+ios/.symlinks/
+ios/Flutter/Flutter.framework
+ios/Flutter/Generated.xcconfig
+
+# VS Code / IntelliJ
+.idea/
+.vscode/
+*.iml
+
+# Misc
+*.log
+*.tmp

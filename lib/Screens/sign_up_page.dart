@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
 
 // Sign Up Page Code
 void main() {
@@ -326,11 +328,11 @@ class _SignUpPageState extends State<SignUpPage> {
 
                       const SizedBox(height: 32),
 
-                      // Username field
+                      // Username field // edited by sohani for firebase 
                       _buildInputField(
-                        label: 'Username',
+                        label: 'Email',
                         controller: _usernameController,
-                        placeholder: 'Enter Username',
+                        placeholder: 'Enter Email',
                       ),
 
                       const SizedBox(height: 24),
@@ -492,31 +494,45 @@ class _SignUpPageState extends State<SignUpPage> {
     );
   }
 
-  void _handleSignUp() {
-    // Validate inputs
-    if (_usernameController.text.isEmpty) {
-      _showSnackBar('Please enter a username');
-      return;
-    }
+  void _handleSignUp() async {
+  final email = _usernameController.text.trim();
+  final password = _passwordController.text;
 
-    if (_passwordController.text.isEmpty) {
-      _showSnackBar('Please enter a password');
-      return;
-    }
-
-    if (_confirmPasswordController.text.isEmpty) {
-      _showSnackBar('Please confirm your password');
-      return;
-    }
-
-    if (_passwordController.text != _confirmPasswordController.text) {
-      _showSnackBar('Passwords do not match');
-      return;
-    }
-
-    // TODO: Implement actual sign up logic
-    _showSnackBar('Sign up successful!');
+  if (email.isEmpty) {
+    _showSnackBar('Please enter an email');
+    return;
   }
+
+  if (password.isEmpty) {
+    _showSnackBar('Please enter a password');
+    return;
+  }
+
+  if (_confirmPasswordController.text != password) {
+    _showSnackBar('Passwords do not match');
+    return;
+  }
+// firebase changes 
+  try {
+    await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      email: email,
+      password: password,
+    );
+    _showSnackBar('Sign up successful!');
+    // TODO: Navigate to next screen or home page
+  } on FirebaseAuthException catch (e) {
+    String message = 'An error occurred';
+    if (e.code == 'email-already-in-use') {
+      message = 'That email is already in use';
+    } else if (e.code == 'invalid-email') {
+      message = 'The email entered is invalid';
+    } else if (e.code == 'weak-password') {
+      message = 'The password is too weak';
+    }
+    _showSnackBar(message);
+  }
+}
+
 
   void _showSnackBar(String message) {
     ScaffoldMessenger.of(context).showSnackBar(
