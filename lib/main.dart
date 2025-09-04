@@ -5,6 +5,16 @@ import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 
+import 'screens/welcome_page.dart';
+// import 'screens/login_page.dart'; 
+import 'screens/grocery_page.dart';
+import 'screens/calendar_page.dart';
+import 'screens/default_page.dart';
+import 'screens/pantry_page.dart';
+import 'screens/preference_page.dart';
+import 'screens/sign_up_page.dart';
+
+
 void main() async {
   // Needed to use async code before runApp
   WidgetsFlutterBinding.ensureInitialized();
@@ -43,7 +53,7 @@ class MyApp extends StatelessWidget {
         // tested with just a hot reload.
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: DefaultPage(),
     );
   }
 }
