@@ -5,14 +5,15 @@ import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 
-// ...
+void main() async {
+  // Needed to use async code before runApp
+  WidgetsFlutterBinding.ensureInitialized();
 
-await Firebase.initializeApp(
+  // Initialize Firebase using the generated config
+  await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
-);
+  );
 
-
-void main() {
   runApp(const MyApp());
 }
 
