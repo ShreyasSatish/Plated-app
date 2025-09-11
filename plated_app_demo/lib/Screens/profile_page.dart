@@ -26,11 +26,13 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  final TextEditingController _nameController = TextEditingController(text: 'John Doe');
-  final TextEditingController _usernameController = TextEditingController(text: '@johndoe');
+  final TextEditingController _nameController =
+      TextEditingController(text: 'John Doe');
+  final TextEditingController _usernameController =
+      TextEditingController(text: '@johndoe');
   final FocusNode _nameFocus = FocusNode();
   final FocusNode _usernameFocus = FocusNode();
-  
+
   String selectedDietaryRequirement = 'None';
   List<String> dietaryOptions = [
     'None',
@@ -62,7 +64,7 @@ class _ProfilePageState extends State<ProfilePage> {
             'Select Dietary Requirements',
             style: TextStyle(color: Colors.white),
           ),
-          content: Container(
+          content: SizedBox(
             width: double.minPositive,
             child: ListView.builder(
               shrinkWrap: true,
@@ -168,7 +170,7 @@ class _ProfilePageState extends State<ProfilePage> {
       body: Column(
         children: [
           // Header section
-          Container(
+          SizedBox(
             height: 140,
             child: Stack(
               children: [
@@ -284,7 +286,8 @@ class _ProfilePageState extends State<ProfilePage> {
                               decoration: BoxDecoration(
                                 color: const Color(0xFFFFA838),
                                 shape: BoxShape.circle,
-                                border: Border.all(color: Colors.white, width: 2),
+                                border:
+                                    Border.all(color: Colors.white, width: 2),
                               ),
                               child: Icon(
                                 Icons.camera_alt,
@@ -320,7 +323,7 @@ class _ProfilePageState extends State<ProfilePage> {
                               shape: RoundedRectangleBorder(
                                 side: BorderSide(
                                   width: 2,
-                                  color: _nameFocus.hasFocus 
+                                  color: _nameFocus.hasFocus
                                       ? const Color(0xFFFFA838)
                                       : const Color(0xFF282626),
                                 ),
@@ -377,7 +380,7 @@ class _ProfilePageState extends State<ProfilePage> {
                               shape: RoundedRectangleBorder(
                                 side: BorderSide(
                                   width: 2,
-                                  color: _usernameFocus.hasFocus 
+                                  color: _usernameFocus.hasFocus
                                       ? const Color(0xFFFFA838)
                                       : const Color(0xFF282626),
                                 ),
@@ -460,7 +463,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     // Save Changes Button
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 39),
-                      child: Container(
+                      child: SizedBox(
                         width: double.infinity,
                         height: 50,
                         child: ElevatedButton(
