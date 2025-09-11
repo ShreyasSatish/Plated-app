@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 
+// Recipe Page Code - index 2 on bottom nav bar (from left to right)
 void main() {
-  runApp(const FigmaToCodeApp());
+  runApp(const RecipePageScreen());
 }
 
-class FigmaToCodeApp extends StatelessWidget {
-  const FigmaToCodeApp({super.key});
+class RecipePageScreen extends StatelessWidget {
+  const RecipePageScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -13,13 +14,13 @@ class FigmaToCodeApp extends StatelessWidget {
       theme: ThemeData.dark().copyWith(
         scaffoldBackgroundColor: const Color.fromARGB(255, 18, 32, 47),
       ),
-      home: const HomepageForYou(),
+      home: const RecipePage(),
     );
   }
 }
 
-class HomepageForYou extends StatelessWidget {
-  const HomepageForYou({super.key});
+class RecipePage extends StatelessWidget {
+  const RecipePage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -77,7 +78,7 @@ class HomepageForYou extends StatelessWidget {
                           width: screenWidth * 0.08, // 8% of screen width
                           height: screenWidth * 0.08,
                           decoration: BoxDecoration(
-                            color: Colors.white.withOpacity(0.2),
+                            color: Colors.white.withValues(alpha: 0.2),
                             borderRadius:
                                 BorderRadius.circular(screenWidth * 0.04),
                           ),
@@ -92,7 +93,7 @@ class HomepageForYou extends StatelessWidget {
                           width: screenWidth * 0.07, // 7% of screen width
                           height: screenWidth * 0.07,
                           decoration: BoxDecoration(
-                            color: Colors.white.withOpacity(0.2),
+                            color: Colors.white.withValues(alpha: 0.2),
                             borderRadius:
                                 BorderRadius.circular(screenWidth * 0.035),
                           ),

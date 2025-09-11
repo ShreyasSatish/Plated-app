@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-// Favourites Page Code
+// Favourites Page Code - index 1 on bottom nav bar (from left to right)
 void main() {
   runApp(const FavouritesPage());
 }

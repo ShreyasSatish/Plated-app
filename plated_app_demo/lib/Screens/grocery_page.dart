@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-// Grocery List Page Code
+// Grocery List Page Code - index 4 on bottom nav bar (from left to right)
 void main() {
   runApp(const GroceryListPage());
 }

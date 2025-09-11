@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-// Pantry Page Code
+// Pantry Page Code - index 3 on bottom nav bar (from left to right)
 void main() {
   runApp(const PantryPage());
 }

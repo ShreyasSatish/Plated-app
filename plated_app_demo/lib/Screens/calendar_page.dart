@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-// Calendar Page Code
+// Calendar Page Code - index 0 on bottom nav bar (from left to right)
 void main() {
   runApp(const CalendarPage());
 }
