@@ -1,26 +1,9 @@
 import 'package:flutter/material.dart';
 
 // Recipe Page Code - index 2 on bottom nav bar (from left to right)
-void main() {
-  runApp(const RecipePageScreen());
-}
 
-class RecipePageScreen extends StatelessWidget {
-  const RecipePageScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData.dark().copyWith(
-        scaffoldBackgroundColor: const Color.fromARGB(255, 18, 32, 47),
-      ),
-      home: const RecipePage(),
-    );
-  }
-}
-
-class RecipePage extends StatelessWidget {
-  const RecipePage({super.key});
+class RecipeScreen extends StatelessWidget {
+  const RecipeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -211,25 +194,6 @@ class RecipePage extends StatelessWidget {
           ),
         ],
       ),
-
-      // Bottom Navigation Bar
-      bottomNavigationBar: Container(
-        height: screenHeight * 0.09, // 9% of screen height
-        decoration: const BoxDecoration(
-          color: Color(0xFF2F2F2E),
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            _buildBottomNavItem(Icons.calendar_month, false, screenWidth),
-            _buildBottomNavItem(Icons.favorite_outline, false, screenWidth),
-            _buildBottomNavItem(Icons.home, true, screenWidth), // Active item
-            _buildBottomNavItem(Icons.receipt_long, false, screenWidth),
-            _buildBottomNavItem(
-                Icons.shopping_cart_outlined, false, screenWidth),
-          ],
-        ),
-      ),
     );
   }
 
@@ -362,24 +326,6 @@ class RecipePage extends StatelessWidget {
             ),
           ),
         ],
-      ),
-    );
-  }
-
-  Widget _buildBottomNavItem(IconData icon, bool isActive, double screenWidth) {
-    return Container(
-      width: screenWidth * 0.12, // 12% of screen width
-      height: screenWidth * 0.12,
-      decoration: isActive
-          ? BoxDecoration(
-              color: const Color(0xFFFFA838),
-              borderRadius: BorderRadius.circular(screenWidth * 0.025),
-            )
-          : null,
-      child: Icon(
-        icon,
-        color: Colors.white,
-        size: screenWidth * 0.06, // 6% of screen width
       ),
     );
   }

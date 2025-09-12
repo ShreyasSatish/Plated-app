@@ -1,23 +1,6 @@
 import 'package:flutter/material.dart';
 
 // Pantry Page Code - index 3 on bottom nav bar (from left to right)
-void main() {
-  runApp(const PantryPage());
-}
-
-class PantryPage extends StatelessWidget {
-  const PantryPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData.dark().copyWith(
-        scaffoldBackgroundColor: const Color.fromARGB(255, 18, 32, 47),
-      ),
-      home: const PantryScreen(),
-    );
-  }
-}
 
 class PantryScreen extends StatefulWidget {
   const PantryScreen({super.key});
@@ -67,9 +50,8 @@ class _PantryScreenState extends State<PantryScreen> {
     final screenWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
-      backgroundColor: const Color(0xFFFFF2DA),
-      body: Stack(
-        children: [
+        backgroundColor: const Color(0xFFFFF2DA),
+        body: Stack(children: [
           Column(
             children: [
               // Top Navigation Bar
@@ -265,164 +247,67 @@ class _PantryScreenState extends State<PantryScreen> {
                 ),
               ),
 
-              // Bottom Navigation Bar
-              Container(
-                width: screenWidth,
-                height: screenHeight * 0.08, // 8% of screen height
-                decoration: const BoxDecoration(color: Color(0xFF2F2F2E)),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    IconButton(
-                      onPressed: () {
-                        setState(() {
-                          selectedBottomIndex = 0;
-                        });
-                        // print('Calendar pressed');
-                      },
-                      icon: Icon(
-                        Icons.calendar_today,
-                        color: selectedBottomIndex == 0
-                            ? const Color(0xFFFFA838)
-                            : Colors.white,
-                        size: 24,
-                      ),
-                    ),
-                    IconButton(
-                      onPressed: () {
-                        setState(() {
-                          selectedBottomIndex = 1;
-                        });
-                        // print('Heart pressed');
-                      },
-                      icon: Icon(
-                        Icons.favorite_outline,
-                        color: selectedBottomIndex == 1
-                            ? const Color(0xFFFFA838)
-                            : Colors.white,
-                        size: 24,
-                      ),
-                    ),
-                    Container(
-                      width: 50,
-                      height: 50,
+              // Floating Dropdown Menu (overlays on top)
+              if (isDropdownOpen)
+                Positioned(
+                  left: screenWidth * 0.02,
+                  top: screenHeight * 0.21, // Adjusted position
+                  child: Material(
+                    elevation: 4,
+                    borderRadius: BorderRadius.circular(8),
+                    child: Container(
+                      width: screenWidth * 0.5,
+                      constraints:
+                          BoxConstraints(maxHeight: screenHeight * 0.25),
                       decoration: BoxDecoration(
-                        color: selectedBottomIndex == 2
-                            ? const Color(0xFFFFA838)
-                            : Colors.transparent,
-                        shape: BoxShape.circle,
+                        color: const Color(0xFFFAEBD7),
+                        borderRadius: BorderRadius.circular(8),
+                        border: Border.all(
+                            width: 0.5, color: const Color(0xFF282626)),
                       ),
-                      child: IconButton(
-                        onPressed: () {
-                          setState(() {
-                            selectedBottomIndex = 2;
-                          });
-                          // print('Pantry pressed');
-                        },
-                        icon: Icon(
-                          Icons.inventory_2_outlined,
-                          color: selectedBottomIndex == 2
-                              ? Colors.white
-                              : Colors.white,
-                          size: 24,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(8),
+                        child: ListView.builder(
+                          padding: EdgeInsets.zero, // Remove default padding
+                          shrinkWrap: true,
+                          itemCount: availableIngredients.length,
+                          itemBuilder: (context, index) {
+                            return InkWell(
+                              onTap: () =>
+                                  addIngredient(availableIngredients[index]),
+                              child: Container(
+                                padding: EdgeInsets.symmetric(
+                                  horizontal: screenWidth * 0.05,
+                                  vertical: screenHeight * 0.012,
+                                ),
+                                decoration: BoxDecoration(
+                                  border:
+                                      index < availableIngredients.length - 1
+                                          ? const Border(
+                                              bottom: BorderSide(
+                                                  width: 0.25,
+                                                  color: Color(0xFFBCA286)))
+                                          : null,
+                                ),
+                                child: Text(
+                                  availableIngredients[index],
+                                  style: const TextStyle(
+                                    color: Color(0xFF282626),
+                                    fontSize: 12,
+                                    fontFamily: 'Inter',
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                ),
+                              ),
+                            );
+                          },
                         ),
                       ),
                     ),
-                    IconButton(
-                      onPressed: () {
-                        setState(() {
-                          selectedBottomIndex = 3;
-                        });
-                        // print('Recipe pressed');
-                      },
-                      icon: Icon(
-                        Icons.menu_book,
-                        color: selectedBottomIndex == 3
-                            ? const Color(0xFFFFA838)
-                            : Colors.white,
-                        size: 24,
-                      ),
-                    ),
-                    IconButton(
-                      onPressed: () {
-                        setState(() {
-                          selectedBottomIndex = 4;
-                        });
-                        // print('Shopping cart pressed');
-                      },
-                      icon: Icon(
-                        Icons.shopping_cart_outlined,
-                        color: selectedBottomIndex == 4
-                            ? const Color(0xFFFFA838)
-                            : Colors.white,
-                        size: 24,
-                      ),
-                    ),
-                  ],
+                  ),
                 ),
-              ),
             ],
           ),
-
-          // Floating Dropdown Menu (overlays on top)
-          if (isDropdownOpen)
-            Positioned(
-              left: screenWidth * 0.02,
-              top: screenHeight * 0.21, // Adjusted position
-              child: Material(
-                elevation: 4,
-                borderRadius: BorderRadius.circular(8),
-                child: Container(
-                  width: screenWidth * 0.5,
-                  constraints: BoxConstraints(maxHeight: screenHeight * 0.25),
-                  decoration: BoxDecoration(
-                    color: const Color(0xFFFAEBD7),
-                    borderRadius: BorderRadius.circular(8),
-                    border:
-                        Border.all(width: 0.5, color: const Color(0xFF282626)),
-                  ),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(8),
-                    child: ListView.builder(
-                      padding: EdgeInsets.zero, // Remove default padding
-                      shrinkWrap: true,
-                      itemCount: availableIngredients.length,
-                      itemBuilder: (context, index) {
-                        return InkWell(
-                          onTap: () =>
-                              addIngredient(availableIngredients[index]),
-                          child: Container(
-                            padding: EdgeInsets.symmetric(
-                              horizontal: screenWidth * 0.05,
-                              vertical: screenHeight * 0.012,
-                            ),
-                            decoration: BoxDecoration(
-                              border: index < availableIngredients.length - 1
-                                  ? const Border(
-                                      bottom: BorderSide(
-                                          width: 0.25,
-                                          color: Color(0xFFBCA286)))
-                                  : null,
-                            ),
-                            child: Text(
-                              availableIngredients[index],
-                              style: const TextStyle(
-                                color: Color(0xFF282626),
-                                fontSize: 12,
-                                fontFamily: 'Inter',
-                                fontWeight: FontWeight.w400,
-                              ),
-                            ),
-                          ),
-                        );
-                      },
-                    ),
-                  ),
-                ),
-              ),
-            ),
-        ],
-      ),
-    );
+        ]));
   }
 }

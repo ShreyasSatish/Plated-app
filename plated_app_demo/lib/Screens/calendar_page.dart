@@ -1,23 +1,6 @@
 import 'package:flutter/material.dart';
 
 // Calendar Page Code - index 0 on bottom nav bar (from left to right)
-void main() {
-  runApp(const CalendarPage());
-}
-
-class CalendarPage extends StatelessWidget {
-  const CalendarPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData.dark().copyWith(
-        scaffoldBackgroundColor: const Color.fromARGB(255, 18, 32, 47),
-      ),
-      home: const CalendarScreen(),
-    );
-  }
-}
 
 class CalendarScreen extends StatefulWidget {
   const CalendarScreen({super.key});
@@ -289,31 +272,6 @@ class _CalendarScreenState extends State<CalendarScreen> {
               ),
             ),
           ),
-
-          // Bottom Navigation - extends to bottom of screen
-          Container(
-            width: double.infinity,
-            color: const Color(0xFF2F2F2E),
-            child: SafeArea(
-              top: false,
-              child: SizedBox(
-                height: screenHeight * 0.08,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    _buildBottomNavItem(
-                        Icons.calendar_today, true, screenWidth, 'calendar'),
-                    _buildBottomNavItem(
-                        Icons.favorite_border, false, screenWidth, 'favorite'),
-                    _buildDoubleStarIcon(screenWidth, 'stars'),
-                    _buildBottomNavItem(Icons.list, false, screenWidth, 'list'),
-                    _buildBottomNavItem(Icons.shopping_cart_outlined, false,
-                        screenWidth, 'cart'),
-                  ],
-                ),
-              ),
-            ),
-          ),
         ],
       ),
     );
@@ -359,7 +317,6 @@ class _CalendarScreenState extends State<CalendarScreen> {
     final screenWidth = MediaQuery.of(context).size.width;
 
     final daysInMonth = _getDaysInMonth(currentDate);
-    final firstDayOffset = _getFirstDayOfWeek(currentDate);
     final previousMonthDays = _getPreviousMonthDays(currentDate);
 
     final List<Widget> weeks = [];
@@ -497,119 +454,6 @@ class _CalendarScreenState extends State<CalendarScreen> {
           contentPadding: EdgeInsets.symmetric(
             horizontal: screenWidth * 0.04,
             vertical: screenHeight * 0.01,
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildBottomNavItem(
-      IconData icon, bool isSelected, double screenWidth, String iconKey) {
-    final isPressed = pressedIcon == iconKey;
-
-    return GestureDetector(
-      onTapDown: (_) => setState(() => pressedIcon = iconKey),
-      onTapUp: (_) => setState(() => pressedIcon = null),
-      onTapCancel: () => setState(() => pressedIcon = null),
-      onTap: () {
-        // Handle navigation tap
-        // print('$iconKey tapped');
-      },
-      child: Container(
-        width: screenWidth * 0.12,
-        height: screenWidth * 0.12,
-        decoration: isPressed
-            ? BoxDecoration(
-                shape: BoxShape.circle,
-                color: Colors.white.withValues(alpha: 0.3),
-              )
-            : null,
-        child: Center(
-          child: Icon(
-            icon,
-            color: isSelected ? const Color(0xFFFFA838) : Colors.white,
-            size: screenWidth * 0.06,
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildClickableIcon({
-    required IconData icon,
-    required String iconKey,
-    required VoidCallback onTap,
-    required double screenWidth,
-  }) {
-    final isPressed = pressedIcon == iconKey;
-
-    return GestureDetector(
-      onTapDown: (_) => setState(() => pressedIcon = iconKey),
-      onTapUp: (_) => setState(() => pressedIcon = null),
-      onTapCancel: () => setState(() => pressedIcon = null),
-      onTap: onTap,
-      child: Container(
-        width: screenWidth * 0.1,
-        height: screenWidth * 0.1,
-        decoration: isPressed
-            ? BoxDecoration(
-                shape: BoxShape.circle,
-                color: Colors.white.withValues(alpha: 0.3),
-              )
-            : null,
-        child: Center(
-          child: Icon(
-            icon,
-            color: Colors.white,
-            size: screenWidth * 0.07,
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildDoubleStarIcon(double screenWidth, String iconKey) {
-    final isPressed = pressedIcon == iconKey;
-
-    return GestureDetector(
-      onTapDown: (_) => setState(() => pressedIcon = iconKey),
-      onTapUp: (_) => setState(() => pressedIcon = null),
-      onTapCancel: () => setState(() => pressedIcon = null),
-      onTap: () {
-        // Handle double star tap
-        // print('Double stars tapped');
-      },
-      child: Container(
-        width: screenWidth * 0.12,
-        height: screenWidth * 0.12,
-        decoration: isPressed
-            ? BoxDecoration(
-                shape: BoxShape.circle,
-                color: Colors.white.withValues(alpha: 0.3),
-              )
-            : null,
-        child: Center(
-          child: Stack(
-            children: [
-              Positioned(
-                left: 8,
-                top: 8,
-                child: Icon(
-                  Icons.star_border,
-                  color: Colors.white,
-                  size: screenWidth * 0.045,
-                ),
-              ),
-              Positioned(
-                right: 12,
-                bottom: 12,
-                child: Icon(
-                  Icons.star_border,
-                  color: Colors.white,
-                  size: screenWidth * 0.045,
-                ),
-              ),
-            ],
           ),
         ),
       ),

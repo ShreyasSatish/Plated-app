@@ -1,41 +1,19 @@
 import 'package:flutter/material.dart';
 
-// Favourites Page Code - index 1 on bottom nav bar (from left to right)
-void main() {
-  runApp(const FavouritesPage());
-}
+// FavouritesScreen Page Code - index 1 on bottom nav bar (from left to right)
 
-class FavouritesPage extends StatelessWidget {
-  const FavouritesPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData.dark().copyWith(
-        scaffoldBackgroundColor: const Color.fromARGB(255, 18, 32, 47),
-      ),
-      home: const Scaffold(
-        body: Favourites(),
-      ),
-    );
-  }
-}
-
-class Favourites extends StatelessWidget {
-  const Favourites({super.key});
+class FavouritesScreen extends StatelessWidget {
+  const FavouritesScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
     final screenWidth = screenSize.width;
-    final screenHeight = screenSize.height;
     final safeAreaTop = MediaQuery.of(context).padding.top;
-    final safeAreaBottom = MediaQuery.of(context).padding.bottom;
 
     return Scaffold(
-      backgroundColor: const Color(0xFFFFF2DA),
-      body: Column(
-        children: [
+        backgroundColor: const Color(0xFFFFF2DA),
+        body: Column(children: [
           // Header Section
           Container(
             width: screenWidth,
@@ -82,12 +60,12 @@ class Favourites extends StatelessWidget {
                     onPressed: () {},
                   ),
                 ),
-                // Favourites title
+                // FavouritesScreen title
                 Positioned(
                   left: screenWidth * 0.0775,
                   bottom: 4,
                   child: Text(
-                    'Favourites',
+                    'FavouritesScreen',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: screenWidth * 0.06,
@@ -115,104 +93,7 @@ class Favourites extends StatelessWidget {
                 ),
               ),
             ),
-          ),
-
-          // Bottom Navigation Bar
-          Container(
-            width: screenWidth,
-            height: 60 + safeAreaBottom, // Content height + bottom safe area
-            decoration: const BoxDecoration(color: Color(0xFF2F2F2E)),
-            child: Padding(
-              padding: EdgeInsets.only(bottom: safeAreaBottom),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  // Calendar icon
-                  _buildBottomNavItem(
-                    icon: Icons.calendar_today_outlined,
-                    screenWidth: screenWidth,
-                  ),
-                  // Favourites icon (highlighted)
-                  _buildBottomNavItem(
-                    icon: Icons.favorite,
-                    screenWidth: screenWidth,
-                    isSelected: true,
-                  ),
-                  // Double star icon
-                  _buildDoubleStarNavItem(screenWidth: screenWidth),
-                  // List icon
-                  _buildBottomNavItem(
-                    icon: Icons.list_alt_outlined,
-                    screenWidth: screenWidth,
-                  ),
-                  // Shopping cart icon
-                  _buildBottomNavItem(
-                    icon: Icons.shopping_cart_outlined,
-                    screenWidth: screenWidth,
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildBottomNavItem({
-    required IconData icon,
-    required double screenWidth,
-    bool isSelected = false,
-  }) {
-    return SizedBox(
-      width: screenWidth * 0.15,
-      height: 60,
-      child: IconButton(
-        icon: Icon(
-          icon,
-          color: isSelected ? const Color(0xFFFFA838) : Colors.white,
-          size: screenWidth * 0.06,
-        ),
-        onPressed: () {},
-      ),
-    );
-  }
-
-  Widget _buildDoubleStarNavItem({required double screenWidth}) {
-    return SizedBox(
-      width: screenWidth * 0.15,
-      height: 60,
-      child: IconButton(
-        icon: SizedBox(
-          width: screenWidth * 0.08,
-          height: screenWidth * 0.08,
-          child: Stack(
-            children: [
-              // Back star (bottom right) - hollow
-              Positioned(
-                right: 0,
-                bottom: 0,
-                child: Icon(
-                  Icons.star_outline,
-                  color: Colors.white,
-                  size: screenWidth * 0.05,
-                ),
-              ),
-              // Front star (top left) - hollow
-              Positioned(
-                left: 0,
-                top: 0,
-                child: Icon(
-                  Icons.star_outline,
-                  color: Colors.white,
-                  size: screenWidth * 0.05,
-                ),
-              ),
-            ],
-          ),
-        ),
-        onPressed: () {},
-      ),
-    );
+          )
+        ]));
   }
 }

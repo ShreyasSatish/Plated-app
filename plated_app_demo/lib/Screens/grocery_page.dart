@@ -1,32 +1,15 @@
 import 'package:flutter/material.dart';
 
-// Grocery List Page Code - index 4 on bottom nav bar (from left to right)
-void main() {
-  runApp(const GroceryListPage());
-}
+// // Grocery List Page Code - index 4 on bottom nav bar (from left to right)
 
-class GroceryListPage extends StatelessWidget {
-  const GroceryListPage({super.key});
+class GroceryScreen extends StatefulWidget {
+  const GroceryScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData.dark().copyWith(
-        scaffoldBackgroundColor: const Color.fromARGB(255, 18, 32, 47),
-      ),
-      home: const GroceryListToBuy(),
-    );
-  }
+  State<GroceryScreen> createState() => _GroceryScreenState();
 }
 
-class GroceryListToBuy extends StatefulWidget {
-  const GroceryListToBuy({super.key});
-
-  @override
-  State<GroceryListToBuy> createState() => _GroceryListToBuyState();
-}
-
-class _GroceryListToBuyState extends State<GroceryListToBuy> {
+class _GroceryScreenState extends State<GroceryScreen> {
   String? selectedCategory;
   bool isDropdownOpen = false;
   final GlobalKey dropdownKey = GlobalKey();
@@ -152,13 +135,11 @@ class _GroceryListToBuyState extends State<GroceryListToBuy> {
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
-    final screenHeight = MediaQuery.of(context).size.height;
     final statusBarHeight = MediaQuery.of(context).padding.top;
 
     return Scaffold(
-      backgroundColor: const Color(0xFFFFF2DA),
-      body: Column(
-        children: [
+        backgroundColor: const Color(0xFFFFF2DA),
+        body: Column(children: [
           // Header
           Container(
             width: screenWidth,
@@ -358,52 +339,7 @@ class _GroceryListToBuyState extends State<GroceryListToBuy> {
               ),
             ),
           ),
-
-          // Bottom Navigation
-          Container(
-            width: screenWidth,
-            height: 100,
-            padding: const EdgeInsets.only(top: 8, bottom: 24),
-            decoration: const BoxDecoration(color: Color(0xFF2F2F2E)),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                _buildNavItem(Icons.receipt_outlined, 0),
-                _buildNavItem(Icons.favorite_outline, 1),
-                _buildNavItem(Icons.qr_code_scanner_outlined, 2),
-                _buildNavItem(Icons.calendar_today_outlined, 3),
-                _buildNavItem(Icons.shopping_cart_outlined, 4),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildNavItem(IconData icon, int index) {
-    final bool isSelected = selectedNavIndex == index;
-    return GestureDetector(
-      onTap: () {
-        setState(() {
-          selectedNavIndex = index;
-        });
-        // print('Nav item $index tapped');
-      },
-      child: Container(
-        width: 40,
-        height: 40,
-        decoration: BoxDecoration(
-          color: isSelected ? const Color(0xFFFFA838) : Colors.transparent,
-          shape: BoxShape.circle,
-        ),
-        child: Icon(
-          icon,
-          color: Colors.white,
-          size: 24,
-        ),
-      ),
-    );
+        ]));
   }
 }
 
